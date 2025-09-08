@@ -8,11 +8,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow-x: hidden;
             background-color: #0a0a0a;
             color: #fafafa;
-            overflow-x: hidden;
+            font-family: system-ui, -apple-system, sans-serif;
         }
 
         .star-wars-title {
@@ -88,11 +90,11 @@
 
         /* Starfield container */
         .starfield {
-            position: absolute;
+            position: fixed; /* cover viewport */
             inset: 0;
-            pointer-events: none;
+            pointer-events: none; /* clicks pass through */
+            z-index: -1; /* behind content */
             overflow: hidden;
-            z-index: 0;
         }
 
         /* Star twinkle animation */
@@ -102,10 +104,10 @@
             100% { opacity: 0.2; transform: scale(0.8); }
         }
 
-        /* Star downward drift animation */
+        /* Star downward drift */
         @keyframes drift {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-100px); }
+            100% { transform: translateY(100px); }
         }
     </style>
 </head>
@@ -153,49 +155,14 @@
             </div>
         </div>
 
-        <!-- Professional Summary -->
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">
-                    <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                    Force Profile
-                </h2>
-            </div>
-            <p class="text-foreground leading-relaxed">
-                Dedicated AI Padawan currently mastering the ancient arts of Artificial Intelligence at the University of
-                Southern Denmark. Strong in the Force of technology with experience across multiple sectors of the galaxy
-                including logistics, retail, and hospitality. Passionate about computer technology, physical training, and
-                the musical arts. Seeking to harness the power of AI to bring balance to the digital universe.
-            </p>
-        </div>
+        <!-- Add your other sections (Professional Summary, Experience, Skills, etc.) here -->
 
-        <!-- Experience -->
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">
-                    <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                    </svg>
-                    Mission Experience
-                </h2>
-            </div>
-            <div class="space-y-6">
-                <!-- ... Repeat your experience cards as before ... -->
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="text-center text-sm text-muted-foreground">
-            <div class="lightsaber-divider w-32 mx-auto mb-4"></div>
-            <p>"Someday I will be the most powerful Jedi ever!" - Anakin Skywalker</p>
-        </div>
     </div>
 
-    <!-- JavaScript to generate random twinkling stars -->
+    <!-- JavaScript to generate twinkling, drifting, colored stars -->
     <script>
         const starfield = document.querySelector('.starfield');
+        const colors = ['#ffffff', '#fff9c4', '#cce6ff']; // white, pale yellow, pale blue
 
         for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
@@ -203,16 +170,18 @@
             const x = Math.random() * window.innerWidth;
             const y = Math.random() * window.innerHeight;
             const opacity = Math.random() * 0.8 + 0.2;
+            const color = colors[Math.floor(Math.random() * colors.length)];
 
             star.style.position = 'absolute';
             star.style.width = `${size}px`;
             star.style.height = `${size}px`;
-            star.style.backgroundColor = `rgba(255,255,255,${opacity})`;
+            star.style.backgroundColor = color;
+            star.style.opacity = opacity;
             star.style.borderRadius = '50%';
             star.style.left = `${x}px`;
             star.style.top = `${y}px`;
 
-            // Twinkle animation
+            // Random twinkle and drift
             const duration = Math.random() * 3 + 2; // 2-5s
             const delay = Math.random() * 5;       // 0-5s
             star.style.animation = `twinkle ${duration}s infinite alternate, drift 20s linear infinite`;
@@ -221,5 +190,6 @@
             starfield.appendChild(star);
         }
     </script>
+
 </body>
 </html>
