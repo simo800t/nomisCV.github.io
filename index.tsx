@@ -1,283 +1,413 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Mail, Phone, MapPin, Globe, Zap, Rocket, Shield, Sword } from "lucide-react"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Holm - Star Wars Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#0a0a0a',
+                        foreground: '#fafafa',
+                        card: '#1a1a1a',
+                        'card-foreground': '#fafafa',
+                        primary: '#dc2626',
+                        'primary-foreground': '#fafafa',
+                        secondary: '#262626',
+                        'secondary-foreground': '#fafafa',
+                        muted: '#262626',
+                        'muted-foreground': '#a3a3a3',
+                        accent: '#f59e0b',
+                        'accent-foreground': '#0a0a0a',
+                        border: '#262626'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #0a0a0a;
+            color: #fafafa;
+        }
+        
+        .star-wars-title {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+            letter-spacing: 0.1em;
+        }
+        
+        .starfield {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: sparkle 20s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-100px); }
+        }
+        
+        .lightsaber-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #dc2626, #f59e0b, #dc2626, transparent);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.8);
+        }
+        
+        .card {
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(38, 38, 38, 0.5);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .card-header {
+            margin-bottom: 16px;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #dc2626;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border-radius: 9999px;
+            background-color: #262626;
+            color: #fafafa;
+            border: 1px solid #262626;
+        }
+        
+        .badge-outline {
+            background-color: transparent;
+            border: 1px solid #262626;
+        }
+        
+        .separator {
+            height: 1px;
+            background-color: #262626;
+            margin: 16px 0;
+        }
+        
+        .icon {
+            width: 16px;
+            height: 16px;
+            color: #f59e0b;
+        }
+        
+        .icon-lg {
+            width: 20px;
+            height: 20px;
+            color: #f59e0b;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-background relative overflow-hidden">
+    <!-- Starfield background -->
+    <div class="absolute inset-0 starfield pointer-events-none"></div>
 
-export default function StarWarsResume() {
-  return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Starfield background */}
-      <div className="absolute inset-0 starfield pointer-events-none" />
-
-      <div className="relative z-10 max-w-4xl mx-auto p-8 space-y-8">
-        {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="star-wars-title text-6xl md:text-8xl text-primary mb-4 drop-shadow-lg">Simon Holm</h1>
-          <p className="text-xl text-muted-foreground font-medium">AI Padawan</p>
-          <div className="lightsaber-divider w-64 mx-auto my-6" />
+    <div class="relative z-10 max-w-4xl mx-auto p-8 space-y-8">
+        <!-- Header -->
+        <div class="text-center space-y-4">
+            <h1 class="star-wars-title text-6xl md:text-8xl text-primary mb-4 drop-shadow-lg">Simon Holm</h1>
+            <p class="text-xl text-muted-foreground font-medium">AI Padawan</p>
+            <div class="lightsaber-divider w-64 mx-auto my-6"></div>
         </div>
 
-        {/* Contact Information */}
-        <Card className="bg-card/80 backdrop-blur-sm border-border/50">
-          <CardContent className="pt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-accent" />
-                <span>simon@cogito.dk</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-accent" />
-                <span>+45 29 82 31 51</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-accent" />
-                <span>Odense, Denmark</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Globe className="h-4 w-4 text-accent" />
-                <span>Born: Dec 16, 2002</span>
-              </div>
+        <!-- Contact Information -->
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                <div class="flex items-center gap-2">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span>simon@cogito.dk</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                    <span>+45 29 82 31 51</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>Odense, Denmark</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"/>
+                    </svg>
+                    <span>Born: Dec 16, 2002</span>
+                </div>
             </div>
-          </CardContent>
-        </Card>
+        </div>
 
-        {/* Professional Summary */}
-        <Card className="bg-card/80 backdrop-blur-sm border-border/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-primary">
-              <Zap className="h-5 w-5 text-accent" />
-              Force Profile
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-foreground leading-relaxed">
-              Dedicated AI Padawan currently mastering the ancient arts of Artificial Intelligence at the University of
-              Southern Denmark. Strong in the Force of technology with experience across multiple sectors of the galaxy
-              including logistics, retail, and hospitality. Passionate about computer technology, physical training, and
-              the musical arts. Seeking to harness the power of AI to bring balance to the digital universe.
+        <!-- Professional Summary -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    Force Profile
+                </h2>
+            </div>
+            <p class="text-foreground leading-relaxed">
+                Dedicated AI Padawan currently mastering the ancient arts of Artificial Intelligence at the University of
+                Southern Denmark. Strong in the Force of technology with experience across multiple sectors of the galaxy
+                including logistics, retail, and hospitality. Passionate about computer technology, physical training, and
+                the musical arts. Seeking to harness the power of AI to bring balance to the digital universe.
             </p>
-          </CardContent>
-        </Card>
-
-        {/* Experience */}
-        <Card className="bg-card/80 backdrop-blur-sm border-border/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-primary">
-              <Rocket className="h-5 w-5 text-accent" />
-              Mission Experience
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold text-lg">Student Research Assistant</h3>
-                <Badge variant="secondary">2025 - Present</Badge>
-              </div>
-              <p className="text-muted-foreground">IMADA (Institute for Mathematics and Computer Science), SDU</p>
-            </div>
-
-            <Separator />
-
-            <div>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold text-lg">Logistics Operative</h3>
-                <Badge variant="secondary">2023 - 2024</Badge>
-              </div>
-              <p className="text-muted-foreground">Coop Logistik, Odense</p>
-            </div>
-
-            <Separator />
-
-            <div>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold text-lg">Warehouse Guardian</h3>
-                <Badge variant="secondary">2021 - 2022</Badge>
-              </div>
-              <p className="text-muted-foreground">Kruuse, Odense</p>
-            </div>
-
-            <Separator />
-
-            <div>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold text-lg">Retail Specialist</h3>
-                <Badge variant="secondary">2020</Badge>
-              </div>
-              <p className="text-muted-foreground">Netto, Ullerslev</p>
-            </div>
-
-            <Separator />
-
-            <div>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold text-lg">Kitchen Operative & Server</h3>
-                <Badge variant="secondary">2018 - 2019</Badge>
-              </div>
-              <p className="text-muted-foreground">Sejlklubben, Kerteminde</p>
-            </div>
-
-            <Separator />
-
-            <div>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold text-lg">Agricultural Specialist</h3>
-                <Badge variant="secondary">2017 - 2019</Badge>
-              </div>
-              <p className="text-muted-foreground">Vestergaard Farm, Revninge</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Galactic Service */}
-        <Card className="bg-card/80 backdrop-blur-sm border-border/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-primary">
-              <Shield className="h-5 w-5 text-accent" />
-              Galactic Service & Leadership
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold text-lg">Academic Council Chairman</h3>
-                <Badge variant="secondary">Present</Badge>
-              </div>
-              <p className="text-muted-foreground mb-2">IMADA Council Board, University of Southern Denmark</p>
-              <p className="text-sm">
-                Leading student representation and academic governance for the Institute of Mathematics and Computer
-                Science, advocating for student interests and facilitating communication between faculty and students.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Skills */}
-        <Card className="bg-card/80 backdrop-blur-sm border-border/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-primary">
-              <Sword className="h-5 w-5 text-accent" />
-              Force Abilities & Skills
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-semibold mb-3 text-primary">AI & Technology Powers</h4>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline">Artificial Intelligence</Badge>
-                  <Badge variant="outline">Machine Learning</Badge>
-                  <Badge variant="outline">Computer Science</Badge>
-                  <Badge variant="outline">Data Analysis</Badge>
-                  <Badge variant="outline">Programming</Badge>
-                  <Badge variant="outline">IT Systems</Badge>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-3 text-primary">Communication Skills</h4>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline">Danish (Native)</Badge>
-                  <Badge variant="outline">English (Fluent)</Badge>
-                  <Badge variant="outline">Technical Writing</Badge>
-                  <Badge variant="outline">Presentation</Badge>
-                  <Badge variant="outline">Team Collaboration</Badge>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-3 text-primary">Physical Training</h4>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline">Fitness Training</Badge>
-                  <Badge variant="outline">Physical Conditioning</Badge>
-                  <Badge variant="outline">Endurance</Badge>
-                  <Badge variant="outline">Discipline</Badge>
-                  <Badge variant="outline">Goal Achievement</Badge>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-3 text-primary">Musical Arts</h4>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline">Guitar Playing</Badge>
-                  <Badge variant="outline">Music Theory</Badge>
-                  <Badge variant="outline">Creative Expression</Badge>
-                  <Badge variant="outline">Performance</Badge>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Education */}
-        <Card className="bg-card/80 backdrop-blur-sm border-border/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-primary">
-              <Shield className="h-5 w-5 text-accent" />
-              Training & Education
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold">Bachelor in Artificial Intelligence</h3>
-                <Badge variant="secondary">2024 - Present</Badge>
-              </div>
-              <p className="text-muted-foreground mb-1">University of Southern Denmark (SDU), Odense</p>
-              <p className="text-sm">
-                Advanced training in AI systems, machine learning, and computational intelligence
-              </p>
-            </div>
-
-            <Separator />
-
-            <div>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold">Technical Academy Training</h3>
-                <Badge variant="secondary">2020 - 2023</Badge>
-              </div>
-              <p className="text-muted-foreground mb-1">Kold Tekniske Gymnasium (HTX), Odense</p>
-              <p className="text-sm">Technical education with focus on mathematics, physics, and technology systems</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Notable Achievements */}
-        <Card className="bg-card/80 backdrop-blur-sm border-border/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-primary">
-              <Badge className="bg-accent text-accent-foreground">⭐</Badge>
-              Notable Achievements
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-start gap-2">
-                <span className="text-accent mt-1">•</span>
-                <span>Successfully transitioned from technical academy to university-level AI studies</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent mt-1">•</span>
-                <span>Gained diverse work experience across multiple industries while pursuing education</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent mt-1">•</span>
-                <span>Demonstrated commitment to continuous learning and personal development</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent mt-1">•</span>
-                <span>Balanced academic pursuits with physical training and creative expression</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent mt-1">•</span>
-                <span>Developed strong work ethic through varied professional experiences</span>
-              </li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        {/* Footer */}
-        <div className="text-center text-sm text-muted-foreground">
-          <div className="lightsaber-divider w-32 mx-auto mb-4" />
-          <p>""Someday I will be the most powerful Jedi ever!" - Anakin Skywalker</p>
         </div>
-      </div>
+
+        <!-- Experience -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                    </svg>
+                    Mission Experience
+                </h2>
+            </div>
+            <div class="space-y-6">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-lg">Student Research Assistant</h3>
+                        <span class="badge">2025 - Present</span>
+                    </div>
+                    <p class="text-muted-foreground">IMADA (Institute for Mathematics and Computer Science), SDU</p>
+                </div>
+
+                <div class="separator"></div>
+
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-lg">Logistics Operative</h3>
+                        <span class="badge">2023 - 2024</span>
+                    </div>
+                    <p class="text-muted-foreground">Coop Logistik, Odense</p>
+                </div>
+
+                <div class="separator"></div>
+
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-lg">Warehouse Guardian</h3>
+                        <span class="badge">2021 - 2022</span>
+                    </div>
+                    <p class="text-muted-foreground">Kruuse, Odense</p>
+                </div>
+
+                <div class="separator"></div>
+
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-lg">Retail Specialist</h3>
+                        <span class="badge">2020</span>
+                    </div>
+                    <p class="text-muted-foreground">Netto, Ullerslev</p>
+                </div>
+
+                <div class="separator"></div>
+
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-lg">Kitchen Operative & Server</h3>
+                        <span class="badge">2018 - 2019</span>
+                    </div>
+                    <p class="text-muted-foreground">Sejlklubben, Kerteminde</p>
+                </div>
+
+                <div class="separator"></div>
+
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-lg">Agricultural Specialist</h3>
+                        <span class="badge">2017 - 2019</span>
+                    </div>
+                    <p class="text-muted-foreground">Vestergaard Farm, Revninge</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Galactic Service -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    Galactic Service & Leadership
+                </h2>
+            </div>
+            <div>
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-semibold text-lg">Academic Council Chairman</h3>
+                    <span class="badge">Present</span>
+                </div>
+                <p class="text-muted-foreground mb-2">IMADA Council Board, University of Southern Denmark</p>
+                <p class="text-sm">
+                    Leading student representation and academic governance for the Institute of Mathematics and Computer
+                    Science, advocating for student interests and facilitating communication between faculty and students.
+                </p>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    Force Abilities & Skills
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-semibold mb-3 text-primary">AI & Technology Powers</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-outline">Artificial Intelligence</span>
+                        <span class="badge badge-outline">Machine Learning</span>
+                        <span class="badge badge-outline">Computer Science</span>
+                        <span class="badge badge-outline">Data Analysis</span>
+                        <span class="badge badge-outline">Programming</span>
+                        <span class="badge badge-outline">IT Systems</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 text-primary">Communication Skills</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-outline">Danish (Native)</span>
+                        <span class="badge badge-outline">English (Fluent)</span>
+                        <span class="badge badge-outline">Technical Writing</span>
+                        <span class="badge badge-outline">Presentation</span>
+                        <span class="badge badge-outline">Team Collaboration</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 text-primary">Physical Training</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-outline">Fitness Training</span>
+                        <span class="badge badge-outline">Physical Conditioning</span>
+                        <span class="badge badge-outline">Endurance</span>
+                        <span class="badge badge-outline">Discipline</span>
+                        <span class="badge badge-outline">Goal Achievement</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 text-primary">Musical Arts</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge badge-outline">Guitar Playing</span>
+                        <span class="badge badge-outline">Music Theory</span>
+                        <span class="badge badge-outline">Creative Expression</span>
+                        <span class="badge badge-outline">Performance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    Training & Education
+                </h2>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold">Bachelor in Artificial Intelligence</h3>
+                        <span class="badge">2024 - Present</span>
+                    </div>
+                    <p class="text-muted-foreground mb-1">University of Southern Denmark (SDU), Odense</p>
+                    <p class="text-sm">
+                        Advanced training in AI systems, machine learning, and computational intelligence
+                    </p>
+                </div>
+
+                <div class="separator"></div>
+
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold">Technical Academy Training</h3>
+                        <span class="badge">2020 - 2023</span>
+                    </div>
+                    <p class="text-muted-foreground mb-1">Kold Tekniske Gymnasium (HTX), Odense</p>
+                    <p class="text-sm">Technical education with focus on mathematics, physics, and technology systems</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notable Achievements -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <span class="badge bg-accent text-accent-foreground">⭐</span>
+                    Notable Achievements
+                </h2>
+            </div>
+            <ul class="space-y-2 text-sm">
+                <li class="flex items-start gap-2">
+                    <span class="text-accent mt-1">•</span>
+                    <span>Successfully transitioned from technical academy to university-level AI studies</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-accent mt-1">•</span>
+                    <span>Gained diverse work experience across multiple industries while pursuing education</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-accent mt-1">•</span>
+                    <span>Demonstrated commitment to continuous learning and personal development</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-accent mt-1">•</span>
+                    <span>Balanced academic pursuits with physical training and creative expression</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-accent mt-1">•</span>
+                    <span>Developed strong work ethic through varied professional experiences</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-sm text-muted-foreground">
+            <div class="lightsaber-divider w-32 mx-auto mb-4"></div>
+            <p>"Someday I will be the most powerful Jedi ever!" - Anakin Skywalker</p>
+        </div>
     </div>
-  )
-}
+</body>
+</html>
+
